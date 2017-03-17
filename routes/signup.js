@@ -105,7 +105,7 @@ router.post('/', checkNotLogin, function(req, res, next) {
                 newUser.save().then(function (result) {
                     // 将用户信息存入 session
                     delete user.password;
-                    req.session.user = user;
+                    req.session.user = result;
                     // 写入 flash
                     req.flash('success', '注册成功');
                     // 跳转到首页

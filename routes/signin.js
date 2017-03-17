@@ -46,7 +46,31 @@ router.post('/', checkNotLogin, function(req, res, next) {
             if (data != null) {
                 if (password == data.get('password')){
                     // 将用户信息存入 session
+                    // var userInfo = {
+                    //     name : name,
+                    //     password : password,
+                    //     avatar : data.get("avatar"),
+                    //     bio : data.get("bio")
+                    // };
                     req.session.user = data;
+                    console.log("login user:" + req.session.user.get('name'));
+                    console.log("login data:" + data.get('objectId') + " " + data.data);
+                    var mymsg  = "";
+                    for (var i in data) {
+                        if(data.hasOwnProperty(i)){
+                            mymsg += "data" + "." + i + "=" + data[i] + "\n";
+                        }
+                    }
+                    console.log(mymsg);
+
+                    mymsg  = "";
+                    for (var i in req.session.user) {
+                        if(req.session.user.hasOwnProperty(i)){
+                            mymsg += "userinfo" + "." + i + "=" + req.session.user[i] + "\n";
+                        }
+                    }
+                    console.log(mymsg);
+
                     // 写入 flash
                     req.flash('success', '登录成功');
                     // 跳转到首页

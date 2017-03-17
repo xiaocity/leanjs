@@ -1,0 +1,38 @@
+<div class="post-content">
+    <div class="ui grid">
+        <div class="four wide column">
+            <a class="avatar"
+               href="/posts?author=<%= user.objectId %>"
+               data-title="<%= user.name %> | <%= ({m: '男', f: '女', x: '保密'})[user.gender] %>"
+               data-content="<%= user.bio %>">
+                <img class="avatar" src="/img/<%= user.avatar %>">
+            </a>
+        </div>
+
+        <div class="eight wide column">
+            <div class="ui segment">
+                <h3><a href="/posts/<%= post.objectId %>"><%= post.title %></a></h3>
+                <pre><%= post.content %></pre>
+                <div>
+                    <span class="tag"><%= post.createdAt %></span>
+                    <span class="tag right">
+                        <span>浏览(<%= post.pv %>)</span>
+                        <span>留言(<%= post.commentsCount %>)</span>
+
+                        <% if (user && user.objectId && user.objectId.toString() === post.author.toString()) { %>
+                        <div class="ui inline dropdown">
+                <div class="text"></div>
+                <i class="dropdown icon"></i>
+                <div class="menu">
+                  <div class="item"><a href="/posts/<%= post.objectId %>/edit">编辑</a></div>
+                  <div class="item"><a href="/posts/<%= post.objectId %>/remove">删除</a></div>
+                </div>
+              </div>
+                        <% } %>
+
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
